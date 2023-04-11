@@ -1,0 +1,373 @@
+[gd_scene load_steps=2 format=3 uid="uid://jhdlqsokif5o"]
+
+[ext_resource type="Script" path="res://lobby.gd" id="1"]
+
+[node name="Lobby" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+script = ExtResource("1")
+
+[node name="Players" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -287.0
+offset_right = 244.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+
+[node name="Label" type="Label" parent="Players"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 18.0
+offset_right = 142.0
+offset_bottom = 32.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "Awaiting Players..."
+
+[node name="Start" type="Button" parent="Players"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 307.0
+offset_right = 193.0
+offset_bottom = 336.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "START!"
+
+[node name="List" type="ItemList" parent="Players"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 37.0
+offset_right = 229.0
+offset_bottom = 296.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+
+[node name="Connect" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 268.0
+offset_top = -287.0
+offset_right = 537.0
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+
+[node name="NameLabel" type="Label" parent="Connect"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 11.0
+offset_right = 56.0
+offset_bottom = 25.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "Name:"
+
+[node name="Name" type="LineEdit" parent="Connect"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 30.0
+offset_right = 173.0
+offset_bottom = 54.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "The Warrior"
+
+[node name="IPLabel" type="Label" parent="Connect"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 94.0
+offset_right = 185.0
+offset_bottom = 120.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "Server Relayed IP:Port"
+
+[node name="IPAddress" type="LineEdit" parent="Connect"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 120.0
+offset_right = 166.0
+offset_bottom = 151.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+
+[node name="IPAddress2" type="LineEdit" parent="Connect"]
+layout_mode = 0
+offset_left = 178.0
+offset_top = 120.0
+offset_right = 245.063
+offset_bottom = 151.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+
+[node name="Host" type="Button" parent="Connect"]
+layout_mode = 0
+offset_left = 181.0
+offset_top = 31.0
+offset_right = 246.0
+offset_bottom = 51.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "Host"
+
+[node name="Join" type="Button" parent="Connect"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 167.0
+offset_right = 243.0
+offset_bottom = 198.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "Join"
+
+[node name="ErrorLabel" type="Label" parent="Connect"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 125.0
+offset_right = 257.0
+offset_bottom = 139.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.820312, 0.291595, 0.291595, 1)
+
+[node name="Label" type="Label" parent="Connect"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 209.0
+offset_right = 245.0
+offset_bottom = 339.0
+text = "Before connecting with TURN,  make sure channels are set up from client to server and also server to client."
+autowrap_mode = 2
+
+[node name="Turn" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -537.0
+offset_top = -284.0
+offset_right = -260.0
+offset_bottom = 304.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+
+[node name="IPLabel" type="Label" parent="Turn"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 16.0
+offset_right = 82.0
+offset_bottom = 42.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "TURN Server:Port:"
+
+[node name="IPAddress" type="LineEdit" parent="Turn"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 45.0
+offset_right = 180.0
+offset_bottom = 76.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "34.142.27.212"
+
+[node name="Port" type="LineEdit" parent="Turn"]
+layout_mode = 0
+offset_left = 187.0
+offset_top = 45.0
+offset_right = 257.0
+offset_bottom = 76.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "3478"
+
+[node name="UsernameLabel" type="Label" parent="Turn"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 83.0
+offset_right = 155.0
+offset_bottom = 109.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "TURN Username"
+
+[node name="Username" type="LineEdit" parent="Turn"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 112.0
+offset_right = 257.0
+offset_bottom = 143.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "username"
+
+[node name="PasswordLabel" type="Label" parent="Turn"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 155.0
+offset_right = 156.0
+offset_bottom = 181.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "TURN Password"
+
+[node name="Password" type="LineEdit" parent="Turn"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 184.0
+offset_right = 260.0
+offset_bottom = 215.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "password"
+
+[node name="RealmLabel" type="Label" parent="Turn"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 223.0
+offset_right = 155.0
+offset_bottom = 249.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "TURN Realm
+"
+
+[node name="Realm" type="LineEdit" parent="Turn"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 252.0
+offset_right = 257.0
+offset_bottom = 283.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "pion.ly"
+
+[node name="ReplayedIPLabel" type="Label" parent="Turn"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 355.0
+offset_right = 119.0
+offset_bottom = 381.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "Relayed IP:"
+
+[node name="Peer" type="Label" parent="Turn"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 423.0
+offset_right = 117.0
+offset_bottom = 449.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "Create Peer Channel:"
+
+[node name="RelayedIPAddress" type="LineEdit" parent="Turn"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 381.0
+offset_right = 223.0
+offset_bottom = 412.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+editable = false
+
+[node name="ChannelPeerIP" type="LineEdit" parent="Turn"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 454.0
+offset_right = 180.0
+offset_bottom = 485.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "34.142.27.212"
+editable = false
+
+[node name="ChannelPeerPort" type="LineEdit" parent="Turn"]
+layout_mode = 0
+offset_left = 187.0
+offset_top = 454.0
+offset_right = 254.063
+offset_bottom = 485.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+editable = false
+
+[node name="Connect" type="Button" parent="Turn"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 294.0
+offset_right = 254.0
+offset_bottom = 325.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "Connect"
+
+[node name="Debug" type="Label" parent="Turn"]
+layout_mode = 0
+offset_left = 287.0
+offset_top = 8.0
+offset_right = 529.0
+offset_bottom = 569.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.820312, 0.291595, 0.291595, 1)
+
+[node name="Clipboard" type="Button" parent="Turn"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 381.0
+offset_right = 261.0
+offset_bottom = 412.0
+text = "📋"
+
+[node name="ChannelCreate" type="Button" parent="Turn"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 493.0
+offset_right = 254.0
+offset_bottom = 524.0
+disabled = true
+text = "Create Channel"
+
+[node name="ErrorDialog" type="AcceptDialog" parent="."]
+
+[connection signal="pressed" from="Players/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Connect/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Connect/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="Turn/Connect" to="." method="_on_turn_connect_pressed"]
+[connection signal="pressed" from="Turn/Clipboard" to="." method="_on_clipboard_pressed"]
+[connection signal="pressed" from="Turn/ChannelCreate" to="." method="_on_channel_create_pressed"]
