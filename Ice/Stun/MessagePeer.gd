@@ -34,45 +34,41 @@ func poll() -> void:
 	## 		   read in big endian to check for valid STUN message
 	## 		   vs channel data - see if a way to read from packed byte
 	##			 array as big endian (or even just write it)
-	var count : int = _peer.get_available_packet_count()
-	if count < 1:
-		return
+	while _peer.get_available_packet_count() > 0:
+		var data : PackedByteArray = _peer.get_packet()
+
+		var err : int = _peer.get_packet_error()
+		if err != Error.OK:
+			push_error("get packet error", err)
+			return
+		if data == null || data.size() == 0:
+			return
+
+		var buffer : StreamPeerBuffer = StreamPeerBuffer.new()
+		buffer.big_endian = true
+		buffer.put_data(data)
+		buffer.seek(0)
+		# header size is too small, definitely not STUN message
+		if data.size() < StunMessage.HEADER_SIZE:
+			emit_signal("bytes_received", buffer)
+			return 
 		
-	var data : PackedByteArray = _peer.get_packet()
+		buffer.seek(4)
+		var cookie : int = buffer.get_32()
+		buffer.seek(0)
 
-	var err : int = _peer.get_packet_error()
-	if err != Error.OK:
-		push_error("get packet error", err)
-		return
+		# Magic Cookie not as expected, definitely not STUN message
+		if cookie != StunMessage.MAGIC_COOKIE:
+			emit_signal("bytes_received", buffer)
+			return
 
-	if data == null || data.size() == 0:
-		return
+		# It looks like a STUN message...
+		var response : StunMessage = StunMessage.from_buffer(buffer)
+		if response == null:
+			return
+		
+		var txn_id_string := response.txn_id.to_string()
+		var request : StunMessage = _txns.get(txn_id_string)
+		_txns.erase(txn_id_string)
 
-	var buffer : StreamPeerBuffer = StreamPeerBuffer.new()
-	buffer.big_endian = true
-	buffer.put_data(data)
-	buffer.seek(0)
-	# header size is too small, definitely not STUN message
-	if data.size() < StunMessage.HEADER_SIZE:
-		emit_signal("bytes_received", buffer)
-		return 
-	
-	buffer.seek(4)
-	var cookie : int = buffer.get_32()
-	buffer.seek(0)
-
-	# Magic Cookie not as expected, definitely not STUN message
-	if cookie != StunMessage.MAGIC_COOKIE:
-		emit_signal("bytes_received", buffer)
-		return
-
-	# It looks like a STUN message...
-	var response : StunMessage = StunMessage.from_buffer(buffer)
-	if response == null:
-		return
-	
-	var txn_id_string := response.txn_id.to_string()
-	var request : StunMessage = _txns.get(txn_id_string)
-	_txns.erase(txn_id_string)
-
-	emit_signal("message_received", response, request)
+		emit_signal("message_received", response, request)

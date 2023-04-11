@@ -49,22 +49,22 @@ func poll() -> void:
 	if _mode == Mode.Server:
 		for channel in _client_sockets:
 			var client_socket : PacketPeerUDP = _client_sockets[channel]
-			if client_socket.get_available_packet_count() == 0:
-				continue
-			var packet : PackedByteArray = client_socket.get_packet()
-			if client_socket.get_packet_error()!=OK:
-				continue
-			#print("TurnENetProxy: Client on channel %d has packet, forwarding" % [channel])
-			# The server has sent a packet to this client proxy - forward
-			# it on to the actual client through the correct TURN channel
-			_turn_client.send_channel_data(channel, packet)
+			while client_socket.get_available_packet_count() > 0:
+				var packet : PackedByteArray = client_socket.get_packet()
+				if client_socket.get_packet_error()!=OK:
+					continue
+				#print("TurnENetProxy: Client on channel %d has packet, forwarding" % [channel])
+				# The server has sent a packet to this client proxy - forward
+				# it on to the actual client through the correct TURN channel
+				_turn_client.send_channel_data(channel, packet)
 				
 	# If we are a client, the packet will always be destined for the server
-	elif _mode==Mode.Client && _server_socket.get_available_packet_count() > 0:
-		var packet : PackedByteArray = _server_socket.get_packet()
-		if _server_socket.get_packet_error()!=OK:
-			return
-		_turn_client.send_channel_data(_turn_server_channel, packet)
+	elif _mode==Mode.Client:
+		while _server_socket.get_available_packet_count() > 0:
+			var packet : PackedByteArray = _server_socket.get_packet()
+			if _server_socket.get_packet_error()!=OK:
+				continue
+			_turn_client.send_channel_data(_turn_server_channel, packet)
 
 func _on_channel_data(channel : int, packet : PackedByteArray) -> void:
 	# Channel data has been recieved from the TURN relay, forward it on to ENet
